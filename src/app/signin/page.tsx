@@ -1,6 +1,6 @@
 'use client'
 
-import { Avatar, InputLabel, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { Avatar, InputLabel, List, ListItemAvatar, ListItemButton, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
@@ -12,10 +12,12 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { useState } from "react";
-import logo from "../../public/assets/kendra-white-full 2.png";
+import logo from "../../../public/assets/kendra-white-full 2.png";
 import Image from "next/image";
+import e from "express";
+import Link from '@mui/material/Link';;
 
-export default function Home() {
+const Signin = () => {
   const [role, setRole] = useState('admin');
 
   const handleChange = (
@@ -56,7 +58,24 @@ export default function Home() {
           }}
         >
           <Typography component="h1" variant="h5">
-            Create Account
+            Login
+          </Typography>
+          <Box sx={{ display: "flex" }}>
+            <List sx={{ display: "flex" }}>
+              <ListItemButton>
+                <ListItemAvatar>
+                  <Avatar />
+                </ListItemAvatar>
+              </ListItemButton>
+              <ListItemButton>
+                <ListItemAvatar>
+                  <Avatar />
+                </ListItemAvatar>
+              </ListItemButton>
+            </List>
+          </Box>
+          <Typography component="p" sx={{ color: "gray" }}>
+            ------------- or Login in with Email -------------
           </Typography>
           <Box
             component="form"
@@ -64,17 +83,6 @@ export default function Home() {
             // onSubmit={handleSubmit}
             sx={{ mt: 1 }}
           >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="username"
-              label="Username"
-              name="username"
-              autoFocus
-              sx={{ mb: -1 }}
-              size="small"
-            />
             <TextField
               margin="normal"
               required
@@ -90,29 +98,6 @@ export default function Home() {
               margin="normal"
               required
               fullWidth
-              id="organization"
-              label="Organization"
-              name="organization"
-              size="small"
-            />
-            <InputLabel shrink htmlFor="role">
-              Role
-            </InputLabel>
-            <ToggleButtonGroup
-              color="primary"
-              value={role}
-              exclusive
-              onChange={handleChange}
-              aria-label="Platform"
-            >
-              <ToggleButton value="admin" sx={{ mx: 5, px: 5, borderRadius: 2 }} size="small">Admin</ToggleButton>
-              <ToggleButton value="user" sx={{ mx: 5, px: 5, borderRadius: 2 }} size="small">User</ToggleButton>
-            </ToggleButtonGroup>
-
-            <TextField
-              margin="normal"
-              required
-              fullWidth
               name="password"
               label="Password"
               type="password"
@@ -121,68 +106,26 @@ export default function Home() {
               sx={{ mb: -1 }}
               size="small"
             />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="confirmPassword"
-              label="Confirm Password"
-              type="password"
-              id="confirmPassword"
-              autoComplete="confirm password"
-              sx={{ mb: -1 }}
-              size="small"
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="country"
-              label="Country"
-              name="country"
-              sx={{ mb: -1 }}
-              size="small"
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="phoneNumber"
-              label="Phone Number"
-              name="phoneNumber"
-              sx={{ mb: -1 }}
-              size="small"
-            />
+            <Grid container sx={{ mt: 3, display: "flex", alignItems: "center" }}>
+              <Grid item>
+                <FormControlLabel
+                  control={<Checkbox value="agree" color="primary" />}
+                  label="I agree to the terms and conditions"
+                />
+              </Grid>
+              <Grid item sx={{ display: "flex", float: "right" }}>
+                <Link href="#" underline="none">
+                  Forgot password?
+                </Link>
+              </Grid>
+            </Grid>
             <Button
               type="submit"
               variant="contained"
               sx={{ mt: 3, mb: 2, mx: 25, color: "white", backgroundColor: "#001555", px: 3, alignSelf: "center" }}
             >
-              Signup
-            </Button><br />
-            <FormControlLabel
-              control={<Checkbox value="agree" color="primary" />}
-              label="I agree to the terms and conditions"
-            />
-            {/* <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
-              </Grid> */}
-
-            {/* </FormControl> */}
-
-
-
-
-            {/* <Copyright sx={{ mt: 5 }} /> */}
+              Login
+            </Button>
           </Box>
         </Box>
       </Grid>
@@ -199,7 +142,6 @@ export default function Home() {
           color: "white",
         }}
       >
-
         <Box
           sx={{
             my: 8,
@@ -207,25 +149,36 @@ export default function Home() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            height: "75vh",
+            height: "80vh",
             justifyContent: "center",
           }}
         >
+          <Typography component="h1" variant="h4" sx={{ mb: 2 }}>
+            New here ?
+          </Typography>
           <Typography component="h1" variant="h5" sx={{ mb: 2, fontWeight: "bold" }}>
-            Welcome back!
+            Welcome to Kendra Sustain
+          </Typography>
+          <Typography component="p" sx={{ mb: 3, }}>
+            Enabling Organizations to Embed Data-driven Sustainability Decision-Making across business operations
           </Typography>
           <Typography component="p">
-            To keep connected with us please login with your personal info
+            Entry your personal details and start Journey with us
           </Typography>
-          <Button
-            type="submit"
-            variant="outlined"
-            sx={{ mt: 3, mb: 2, color: "white", borderColor: "white", px: 3 }}
-          >
-            Login
-          </Button>
+          <Link href="/signup" underline="none">
+            <Button
+              type="submit"
+              variant="outlined"
+              sx={{ mt: 3, mb: 2, color: "white", borderColor: "white", px: 3 }}
+            >
+              Signup
+            </Button>
+          </Link>
+
         </Box>
       </Grid>
     </Grid >
   );
 }
+
+export default Signin;

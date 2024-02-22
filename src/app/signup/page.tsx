@@ -1,6 +1,6 @@
 'use client'
 
-import { Avatar, InputLabel, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { Avatar, InputLabel, Link, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
@@ -12,10 +12,11 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { useState } from "react";
-import logo from "../../public/assets/kendra-white-full 2.png";
+import logo from "../../../public/assets/kendra-white-full 2.png";
 import Image from "next/image";
+import e from "express";
 
-export default function Home() {
+const Signup = () => {
   const [role, setRole] = useState('admin');
 
   const handleChange = (
@@ -28,8 +29,19 @@ export default function Home() {
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
       <CssBaseline />
-
-      <Grid item xs={12} sm={8} md={6} component={Paper} elevation={6} square>
+      <Grid
+        item
+        xs={false}
+        sm={4}
+        md={6}
+        sx={{
+          backgroundRepeat: "no-repeat",
+          backgroundColor: "#001555",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          color: "white",
+        }}
+      >
         <Box sx={{
           my: 2,
           mx: 5
@@ -46,6 +58,35 @@ export default function Home() {
             />Kendra Sustain
           </Typography>
         </Box>
+        <Box
+          sx={{
+            my: 8,
+            mx: 15,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            height: "75vh",
+            justifyContent: "center",
+          }}
+        >
+          <Typography component="h1" variant="h5" sx={{ mb: 2, fontWeight: "bold" }}>
+            Welcome back!
+          </Typography>
+          <Typography component="p">
+            To keep connected with us please login with your personal info
+          </Typography>
+          <Link href="/signin" underline="none">
+            <Button
+              type="submit"
+              variant="outlined"
+              sx={{ mt: 3, mb: 2, color: "white", borderColor: "white", px: 3 }}
+            >
+              Login
+            </Button>
+          </Link>
+        </Box>
+      </Grid>
+      <Grid item xs={12} sm={8} md={6} component={Paper} elevation={6} square>
         <Box
           sx={{
             my: 8,
@@ -153,79 +194,24 @@ export default function Home() {
               sx={{ mb: -1 }}
               size="small"
             />
+            <FormControlLabel
+              control={<Checkbox value="agree" color="primary" />}
+              label="I agree to the terms and conditions"
+            />
             <Button
               type="submit"
               variant="contained"
               sx={{ mt: 3, mb: 2, mx: 25, color: "white", backgroundColor: "#001555", px: 3, alignSelf: "center" }}
             >
               Signup
-            </Button><br />
-            <FormControlLabel
-              control={<Checkbox value="agree" color="primary" />}
-              label="I agree to the terms and conditions"
-            />
-            {/* <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
-              </Grid> */}
+            </Button>
+            <br />
 
-            {/* </FormControl> */}
-
-
-
-
-            {/* <Copyright sx={{ mt: 5 }} /> */}
           </Box>
-        </Box>
-      </Grid>
-      <Grid
-        item
-        xs={false}
-        sm={4}
-        md={6}
-        sx={{
-          backgroundRepeat: "no-repeat",
-          backgroundColor: "#001555",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          color: "white",
-        }}
-      >
-
-        <Box
-          sx={{
-            my: 8,
-            mx: 15,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            height: "75vh",
-            justifyContent: "center",
-          }}
-        >
-          <Typography component="h1" variant="h5" sx={{ mb: 2, fontWeight: "bold" }}>
-            Welcome back!
-          </Typography>
-          <Typography component="p">
-            To keep connected with us please login with your personal info
-          </Typography>
-          <Button
-            type="submit"
-            variant="outlined"
-            sx={{ mt: 3, mb: 2, color: "white", borderColor: "white", px: 3 }}
-          >
-            Login
-          </Button>
         </Box>
       </Grid>
     </Grid >
   );
 }
+
+export default Signup;
